@@ -11,6 +11,7 @@ public class App2 {
 		File file = new File("text.txt");
 		
 		// Try with resources (since java 7) 
+		// We have no need to close file in this case
 		try( BufferedReader br = new BufferedReader(new FileReader(file)) ) {
 			
 			String line;
