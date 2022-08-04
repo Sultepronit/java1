@@ -4,6 +4,7 @@ class Tower {
 	public int top;
 	public int value;
 	public boolean sameAsBase;
+	ArrayList<Integer> list = new ArrayList<>();
 	
 	public Tower(int top, int value, boolean sameAsBase) {
 		this.top = top;
@@ -17,47 +18,91 @@ public class App2 {
 	static int n = 1;
 	static boolean isNOdd;
 	
-	static ArrayList<Integer> first = new ArrayList<>();
-	static ArrayList<Integer> middle = new ArrayList<>();
-	static ArrayList<Integer> last = new ArrayList<>();
-	
-	static Tower firstT;
-	static Tower middleT;
-	static Tower lastT;
+	static Tower first;
+	static Tower middle;
+	static Tower last;
 	
 	static void initiate() {
 		interations = 0;
+		
 		isNOdd = isOdd(n);
-		for(int j = n; j > 0; j--) {
-			first.add(j);
-		}
 		System.out.println(n + " / " + isNOdd);
-		firstT = new Tower(n-1, 1, isNOdd);
-		middleT = new Tower(-1, 0, false);
-		lastT = new Tower(-1, 0, true);
+		
+		first = new Tower(n-1, 1, isNOdd);
+		middle = new Tower(-1, 0, true);
+		last = new Tower(-1, 0, false);
+		
+		for(int j = n; j > 0; j--) {
+			first.list.add(j);
+		}
+
+		
 	}
 	
 	static boolean isOdd(int number) {
 		return (number % 2) > 0;
 	}
 	
-	static boolean isTheSame(int number) {
+	/*static boolean isTheSame(int number) {
 		return isNOdd == isOdd(number);
-	}
+	}*/
 	
 	static int interations = 0;
 	
-	static void move(boolean same) {
+	static void moveStep(Tower from, Tower to) {
+		to.top++;
+		to.value = from.value;
+		to.sameAsBase = !to.sameAsBase;
+		to.list.add(from.value);
 		
+		from.list.remove(from.top--);
+		from.value = (from.top >= 0) ? from.list.get(from.top) : 0;
+		from.sameAsBase = !from.sameAsBase;
+	}
+	
+	static void move() {
+		do {
+			if(last.value == 0) {
+				if(first.sameAsBase) {
+					moveStep(first, last);
+					break;
+				}
+			}
+			if(middle.value == 0) {
+					if(!first.sameAsBase) {
+						moveStep(first, middle);
+						break;
+					}
+			}
+			if(middle.value > 0) {
+				if(!middle.sameAsBase) {
+					moveStep(middle, last);
+					break;
+				}
+		}
+		}
+		while(false);
+	
+		
+		dispaly();
+		
+		if(last.top == n-1) {
+			System.out.println("Success!");
+			return;
+		}
+		
+		interations++;
+		if(interations > 4) return;
+		
+		move();
 	}
 	
 	private static void start(int number)
 	{	
 		n = number;
-		last.clear();
 		initiate();
 		dispaly();
-		move( isNOdd );
+		move();
 	}
 
 	public static void main(String[] args) {
@@ -66,16 +111,16 @@ public class App2 {
 		
 		start(1);
 		start(2);
-		start(3);
+		//start(3);
 		
 		//System.out.println("hey!");
 	}
 	
 	public static void dispaly() {
 		for(int i = n - 1; i >= 0; i--) {
-			displayChar(first, i);
-			displayChar(middle, i);
-			displayChar(last, i);
+			displayChar(first.list, i);
+			displayChar(middle.list, i);
+			displayChar(last.list, i);
 			System.out.println();
 		}
 		System.out.println();
