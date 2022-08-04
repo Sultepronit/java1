@@ -74,12 +74,43 @@ public class App2 {
 						break;
 					}
 			}
-			if(middle.value > 0) {
-				if(!middle.sameAsBase) {
-					moveStep(middle, last);
-					break;
+			if(first.value > 0) {
+				if(first.sameAsBase != last.sameAsBase) {
+					if(first.value < last.value) {
+						moveStep(first, last);
+						break;
+					}
 				}
-		}
+			}
+			if(last.value > 0) {
+				if(last.sameAsBase != middle.sameAsBase) {
+					if(last.value < middle.value) {
+						moveStep(last, middle);
+						break;
+					}
+				}
+				if(last.sameAsBase != first.sameAsBase) {
+					if(last.value < first.value) {
+						moveStep(last, first);
+						break;
+					}
+				}
+			}
+			if(middle.value > 0) {
+				if(middle.sameAsBase != last.sameAsBase) {
+					if(middle.value < last.value) {
+						moveStep(middle, last);
+						break;
+					}
+				}
+				if(middle.sameAsBase != first.sameAsBase) {
+					//if(middle.value > last.value) {
+					if(first.value == 0) {
+						moveStep(middle, first);
+						break;
+					}
+				}
+			}
 		}
 		while(false);
 	
@@ -92,7 +123,7 @@ public class App2 {
 		}
 		
 		interations++;
-		if(interations > 4) return;
+		if(interations > 8) return;
 		
 		move();
 	}
@@ -111,7 +142,8 @@ public class App2 {
 		
 		start(1);
 		start(2);
-		//start(3);
+		start(3);
+		start(4);
 		
 		//System.out.println("hey!");
 	}
