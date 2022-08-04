@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-/*class Tower {
+class Tower {
 	public int top;
 	public int value;
 	public boolean sameAsBase;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 		this.value = value;
 		this.sameAsBase = sameAsBase;
 	}
-}*/
+}
 
-public class App {
+public class App2 {
 	
 	static int n = 1;
 	static boolean isNOdd;
@@ -21,9 +21,6 @@ public class App {
 	static ArrayList<Integer> middle = new ArrayList<>();
 	static ArrayList<Integer> last = new ArrayList<>();
 	
-	/*static Tower firstT = new Tower();
-	static Tower middleT = new Tower();
-	static Tower lastT = new Tower();*/
 	static Tower firstT;
 	static Tower middleT;
 	static Tower lastT;
@@ -51,52 +48,6 @@ public class App {
 	static int interations = 0;
 	
 	static void move(boolean same) {
-		/*int firstTop = first.size()-1;
-		int middleTop = middle.size()-1;
-		int lastTop = last.size()-1;*/
-		
-		/*int firstE = (firstTop > 0) ? first.get(firstTop) : 0;
-		int middleE = (middleTop > 0) ? middle.get(middleTop) : 0;
-		int lastE = (lastTop > 0) ? last.get(lastTop) : 0;*/
-		
-		
-		/*if(same) {
-			if(lastTop < 0) {
-				last.add( first.get(firstTop) );
-				first.remove(firstTop);
-			}
-		}
-		else {
-			if(middleTop < 0) {
-				middle.add( first.get(firstTop) );
-				first.remove(firstTop);
-			}
-			else {
-				if( !isTheSame(middle.get(middleTop)) ) {
-					last.add( middle.get(middleTop) );
-					middle.remove(middleTop);
-				}
-			}
-		}
-		
-		dispaly();
-		
-		if( last.size() == n) {
-			System.out.println("Success!");
-			return;
-		}
-		
-		interations++;
-		if(interations > 5) return;
-		
-		move(true);
-		if(same) {
-			move(false);
-		}
-		else {
-			move(true);
-		}*/
-		
 		
 	}
 	
